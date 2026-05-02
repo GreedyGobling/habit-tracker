@@ -11,7 +11,7 @@ class Habit {
     }
     
     func deleteAll() {
-        // delete all data in habit
+        try? modelContext?.delete(model: Habit.self)
     }
     
 }
