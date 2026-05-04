@@ -4,14 +4,9 @@ import SwiftData
 class Habit {
     var title: String
     var isDone: Bool = false
-    
-    init(title: String, isDone: Bool = false) {
+    var completed: Int = 0
+
+    init(title: String) {
         self.title = title
-        self.isDone = isDone
     }
-    
-    func deleteAll() {
-        try? modelContext?.delete(model: Habit.self)
-    }
-    
 }
