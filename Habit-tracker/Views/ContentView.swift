@@ -14,17 +14,22 @@ struct ContentView: View {
                 Text("hello")
                 TextField("name of habita", text: $habitname)
                 List(habits) { habit in
-                    Text(habit.title)
-                }
-                Button("add habit") {
-                    vm.addHabit(title: habitname, context: modelContext)
-                    habitname = ""
-                }
-                Button("delete all") {
-                    vm.deleteAll(context: modelContext)
+                    HStack {
+                        Text(habit.title)
+                        Text("current streak: \(habit.currentStreak)")
+                        Toggle("", isOn: .constant(false))
+
+                    }
                 }
             }
-            .padding()
+            Button("add habit") {
+                vm.addHabit(title: habitname, context: modelContext)
+                habitname = ""
+            }
+            Button("delete all") {
+                vm.deleteAll(context: modelContext)
+            }
         }
+        .padding()
     }
 }

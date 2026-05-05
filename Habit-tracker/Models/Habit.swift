@@ -10,5 +10,6 @@ class Habit {
 
     init(title: String) {
         self.title = title
+        self.currentStreak = 0
     }
 }
