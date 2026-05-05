@@ -25,5 +25,14 @@ class HabitViewModel {
     func markDone(_ habit: Habit, context: ModelContext) {
         habit.isDone = true
         habit.completed += 1
+        if habit.currentStreak == 0 {
+            habit.currentStreak = 1
+        } else {
+            habit.currentStreak += 1
+        }
+        if habit.currentStreak > habit.maxStreak {
+            habit.maxStreak = habit.currentStreak
+        }
+        try? context.save()
     }
 }

@@ -17,8 +17,10 @@ struct ContentView: View {
                     HStack {
                         Text(habit.title)
                         Text("current streak: \(habit.currentStreak)")
-                        Toggle("", isOn: .constant(false))
-
+                        Toggle("", isOn: Binding(
+                            get: { habit.isDone },
+                            set: { _ in vm.markDone(habit, context: modelContext) }
+                        ))
                     }
                 }
             }
