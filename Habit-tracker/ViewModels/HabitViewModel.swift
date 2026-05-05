@@ -14,7 +14,12 @@ class HabitViewModel {
     }
 
     func deleteAll(context: ModelContext) {
-        try? context.delete(model: Habit.self)
+        let descriptor = FetchDescriptor<Habit>()
+        if let habits = try? context.fetch(descriptor) {
+            for habit in habits {
+                context.delete(habit)
+            }
+        }
     }
 
     func markDone(_ habit: Habit, context: ModelContext) {
