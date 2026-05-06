@@ -27,7 +27,9 @@ struct ContentView: View {
                                 set: { _ in vm.markDone(habit, context: modelContext) }
                             ))
                     }
+                    .onTapGesture { selectedHabit = habit; showEditor = true}
                 }
+                
             }
             Button("add habit") {
                 vm.addHabit(title: habitname, context: modelContext)
@@ -38,5 +40,8 @@ struct ContentView: View {
             }
         }
         .padding()
+        .sheet(isPresented: $showEditor) {
+            EditorView(habit: selectedHabit)
+        }
     }
 }

@@ -16,7 +16,11 @@ struct EditorView: View {
 
     var body: some View {
         VStack {
-
+            
+            
+            Button("Dismiss") {
+                dismiss()
+            }
         }
     }
 }
