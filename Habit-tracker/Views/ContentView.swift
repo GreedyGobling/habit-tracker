@@ -28,7 +28,10 @@ struct ContentView: View {
                         showEditor = true
                     }
                 }
-
+            
+            }
+            Button ("Add new habit") {
+                showEditor = true
             }
             Button("delete all") {
                 vm.deleteAll(context: modelContext)
