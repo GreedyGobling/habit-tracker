@@ -30,7 +30,16 @@ struct EditorView: View {
                 dismiss()
             }
             .disabled(habitname.isEmpty)
-
+            
+            Button("Delete", role: .destructive) {
+                if let habit {
+                    vm.deleteHabit(habit, context: modelContext)
+                    dismiss()
+                }
+            }
+            .disabled(habit == nil)
+            .opacity(habit == nil ? 0 : 1)
+            
             Button("Dismiss") {
                 dismiss()
             }
