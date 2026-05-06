@@ -8,6 +8,9 @@ struct ContentView: View {
     @State private var vm = HabitViewModel()
     @State private var habitname: String = ""
 
+    @State private var showEditor = false
+    @State private var selectedHabit: Habit? = nil
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -17,10 +20,12 @@ struct ContentView: View {
                     HStack {
                         Text(habit.title)
                         Text("current streak: \(habit.currentStreak)")
-                        Toggle("", isOn: Binding(
-                            get: { habit.isDone },
-                            set: { _ in vm.markDone(habit, context: modelContext) }
-                        ))
+                        Toggle(
+                            "",
+                            isOn: Binding(
+                                get: { habit.isDone },
+                                set: { _ in vm.markDone(habit, context: modelContext) }
+                            ))
                     }
                 }
             }

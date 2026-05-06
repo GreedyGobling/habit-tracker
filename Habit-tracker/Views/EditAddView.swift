@@ -10,6 +10,9 @@ import SwiftData
 import SwiftUI
 
 struct EditorView: View {
+    var habit: Habit?
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         VStack {
