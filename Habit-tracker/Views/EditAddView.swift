@@ -17,13 +17,14 @@ enum EditorMode {
 }
 
 struct EditorView: View {
-    var mode: EditorMode
+    //var mode: EditorMode
     var habit: Habit?
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @State private var vm = HabitViewModel()
 
     @State private var habitname: String = ""
+    
 
     var body: some View {
         VStack {

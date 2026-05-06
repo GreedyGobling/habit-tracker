@@ -1,3 +1,4 @@
+import Foundation
 import Observation
 import SwiftData
 
@@ -23,13 +24,26 @@ class HabitViewModel {
     }
 
     func markDone(_ habit: Habit, context: ModelContext) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        if let last = habit.lastCompletedDate, calendar.isDate(last, inSameDayAs: today) {
+            return
+        }
+
+        let previousDate = habit.lastCompletedDate
         habit.isDone = true
         habit.completed += 1
-        if habit.currentStreak == 0 {
-            habit.currentStreak = 1
-        } else {
+        habit.lastCompletedDate = today
+
+        if let last = previousDate,
+           let yesterday = calendar.date(byAdding: .day, value: -1, to: today),
+           calendar.isDate(last, inSameDayAs: yesterday) {
             habit.currentStreak += 1
+        } else {
+            habit.currentStreak = 1
         }
+
         if habit.currentStreak > habit.maxStreak {
             habit.maxStreak = habit.currentStreak
         }

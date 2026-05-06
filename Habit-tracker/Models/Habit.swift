@@ -1,3 +1,4 @@
+import Foundation
 import SwiftData
 
 @Model
@@ -5,6 +6,8 @@ class Habit {
     var title: String
     var isDone: Bool = false
     var completed: Int = 0
+    var lastCompletedDate: Date?
+
     var currentStreak: Int = 0
     var maxStreak: Int = 0
 
