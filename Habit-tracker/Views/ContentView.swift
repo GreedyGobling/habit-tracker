@@ -14,8 +14,13 @@ struct ContentView: View {
             VStack {
                 List(habits) { habit in
                     HStack {
+                        Image(systemName: habit.isDone ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(habit.isDone ? .green : .secondary)
                         Text(habit.title)
-                        Text("current streak: \(habit.currentStreak)")
+                        Spacer()
+                        Label("\(habit.currentStreak)", systemImage: "flame.fill")
+                            .labelStyle(.titleAndIcon)
+                            .foregroundStyle(.orange)
                         Toggle(
                             "",
                             isOn: Binding(
@@ -28,13 +33,20 @@ struct ContentView: View {
                         showEditor = true
                     }
                 }
-            
             }
-            Button ("Add new habit") {
+            .navigationTitle("Habit Tracker")
+
+            Button {
+                selectedHabit = nil
                 showEditor = true
+            } label: {
+                Label("Add new habit", systemImage: "plus.circle.fill")
             }
-            Button("delete all") {
+
+            Button(role: .destructive) {
                 vm.deleteAll(context: modelContext)
+            } label: {
+                Label("Delete all", systemImage: "trash")
             }
         }
         .padding()
