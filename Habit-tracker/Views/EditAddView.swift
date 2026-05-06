@@ -9,7 +9,15 @@ import SwiftData
 // adding and editing a habit
 import SwiftUI
 
+// adding enum for ui stuff
+enum EditorMode {
+    case add
+    case edit(Habit)
+    case view
+}
+
 struct EditorView: View {
+    var mode: EditorMode
     var habit: Habit?
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -30,7 +38,8 @@ struct EditorView: View {
                 dismiss()
             }
             .disabled(habitname.isEmpty)
-            
+
+            // make seperate button func with if enum case TODO
             Button("Delete", role: .destructive) {
                 if let habit {
                     vm.deleteHabit(habit, context: modelContext)
@@ -39,7 +48,7 @@ struct EditorView: View {
             }
             .disabled(habit == nil)
             .opacity(habit == nil ? 0 : 1)
-            
+
             Button("Dismiss") {
                 dismiss()
             }
@@ -48,4 +57,5 @@ struct EditorView: View {
             habitname = habit?.title ?? ""
         }
     }
+
 }
