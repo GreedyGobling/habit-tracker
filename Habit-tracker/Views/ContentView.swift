@@ -14,8 +14,8 @@ struct ContentView: View {
             VStack {
                 List(habits) { habit in
                     HStack {
-                        Image(systemName: habit.isDone ? "checkmark.circle.fill" : "circle")
-                            .foregroundStyle(habit.isDone ? .green : .secondary)
+                        Image(systemName: habit.doneToday ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(habit.doneToday ? .green : .secondary)
                         Text(habit.title)
                         Spacer()
                         Label("\(habit.currentStreak)", systemImage: "flame.fill")
@@ -24,7 +24,7 @@ struct ContentView: View {
                         Toggle(
                             "",
                             isOn: Binding(
-                                get: { habit.isDone },
+                                get: { habit.doneToday },
                                 set: { _ in vm.markDone(habit, context: modelContext) }
                             ))
                     }

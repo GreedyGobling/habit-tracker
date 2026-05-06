@@ -24,7 +24,7 @@ struct EditorView: View {
     @State private var vm = HabitViewModel()
 
     @State private var habitname: String = ""
-    
+    @State private var showNameError = false
 
     var body: some View {
         VStack {
@@ -34,16 +34,25 @@ struct EditorView: View {
             TextField("name of habit", text: $habitname)
 
             Button {
+                guard !habitname.trimmingCharacters(in: .whitespaces).isEmpty else {
+                    showNameError = true
+                    return
+                }
+                let trimmed = habitname.trimmingCharacters(in: .whitespaces)
                 if let habit {
-                    habit.title = habitname
+                    habit.title = trimmed
                 } else {
-                    vm.addHabit(title: habitname, context: modelContext)
+                    vm.addHabit(title: trimmed, context: modelContext)
                 }
                 dismiss()
             } label: {
                 Label(habit == nil ? "Add" : "Save", systemImage: habit == nil ? "plus" : "square.and.arrow.down")
             }
-            .disabled(habitname.isEmpty)
+            .alert("Namn saknas", isPresented: $showNameError) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Du måste ange ett namn för vanan.")
+            }
 
             // make seperate button func with if enum case TODO
             Button(role: .destructive) {
