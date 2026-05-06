@@ -4,9 +4,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var habits: [Habit]
-
     @State private var vm = HabitViewModel()
-    @State private var habitname: String = ""
 
     @State private var showEditor = false
     @State private var selectedHabit: Habit? = nil
@@ -14,8 +12,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("hello")
-                TextField("name of habita", text: $habitname)
                 List(habits) { habit in
                     HStack {
                         Text(habit.title)
@@ -27,13 +23,12 @@ struct ContentView: View {
                                 set: { _ in vm.markDone(habit, context: modelContext) }
                             ))
                     }
-                    .onTapGesture { selectedHabit = habit; showEditor = true}
+                    .onTapGesture {
+                        selectedHabit = habit
+                        showEditor = true
+                    }
                 }
-                
-            }
-            Button("add habit") {
-                vm.addHabit(title: habitname, context: modelContext)
-                habitname = ""
+
             }
             Button("delete all") {
                 vm.deleteAll(context: modelContext)

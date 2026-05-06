@@ -13,14 +13,30 @@ struct EditorView: View {
     var habit: Habit?
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @State private var vm = HabitViewModel()
+
+    @State private var habitname: String = ""
 
     var body: some View {
         VStack {
-            
-            
+            TextField("name of habit", text: $habitname)
+
+            Button(habit == nil ? "Add" : "Save") {
+                if let habit {
+                    habit.title = habitname
+                } else {
+                    vm.addHabit(title: habitname, context: modelContext)
+                }
+                dismiss()
+            }
+            .disabled(habitname.isEmpty)
+
             Button("Dismiss") {
                 dismiss()
             }
+        }
+        .onAppear {
+            habitname = habit?.title ?? ""
         }
     }
 }
