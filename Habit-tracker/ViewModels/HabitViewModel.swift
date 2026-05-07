@@ -51,6 +51,7 @@ class HabitViewModel {
         let streakBeforeToday = habit.actualCurrentStreak
         habit.completed += 1
         habit.lastCompletedDate = today
+        habit.completionDates.append(today)
 
         if let last = previousDate,
            let yesterday = calendar.date(byAdding: .day, value: -1, to: today),
