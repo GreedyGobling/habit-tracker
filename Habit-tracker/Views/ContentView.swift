@@ -13,14 +13,17 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 List(habits) { habit in
-                    HStack {
+                    HStack { // sort the habits??? done to not done + letter sorting???
                         Image(systemName: habit.doneToday ? "checkmark.circle.fill" : "circle")
                             .foregroundStyle(habit.doneToday ? .green : .secondary)
                         Text(habit.title)
                         Spacer()
+                        // change that the number and flame closer?
                         Label("\(habit.currentStreak)", systemImage: "flame.fill")
                             .labelStyle(.titleAndIcon)
                             .foregroundStyle(.orange)
+                        
+                        // change toggle to button would look better i think
                         Toggle(
                             "",
                             isOn: Binding(

@@ -32,6 +32,7 @@ struct EditorView: View {
                 .font(.headline)
 
             TextField("name of habit", text: $habitname)
+            //TODO make ui better
 
             Button {
                 guard !habitname.trimmingCharacters(in: .whitespaces).isEmpty else {
