@@ -15,6 +15,24 @@ class Habit {
         return Calendar.current.isDateInToday(last)
     }
 
+    var actualCurrentStreak: Int {
+        guard let last = lastCompletedDate else { return 0 }
+
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        if calendar.isDate(last, inSameDayAs: today) {
+            return currentStreak
+        }
+
+        if let yesterday = calendar.date(byAdding: .day, value: -1, to: today),
+           calendar.isDate(last, inSameDayAs: yesterday) {
+            return currentStreak
+        }
+
+        return 0
+    }
+
     init(title: String) {
         self.title = title
         self.currentStreak = 0

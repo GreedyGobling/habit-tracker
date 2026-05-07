@@ -19,7 +19,7 @@ struct ContentView: View {
                         Text(habit.title)
                         Spacer()
                         // change that the number and flame closer?
-                        Label("\(habit.currentStreak)", systemImage: "flame.fill")
+                        Label("\(habit.actualCurrentStreak)", systemImage: "flame.fill")
                             .labelStyle(.titleAndIcon)
                             .foregroundStyle(.orange)
                         
