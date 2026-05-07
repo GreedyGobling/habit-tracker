@@ -32,7 +32,8 @@ struct EditorView: View {
                 .font(.headline)
 
             TextField("name of habit", text: $habitname)
-            //TODO make ui better
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal)
 
             Button {
                 guard !habitname.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -56,7 +57,7 @@ struct EditorView: View {
             }
 
             // make seperate button func with if enum case TODO
-            Button(role: .destructive) { // remove this before sending
+            Button(role: .destructive) {
                 if let habit {
                     vm.deleteHabit(habit, context: modelContext)
                     dismiss()
