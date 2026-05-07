@@ -32,7 +32,6 @@ class HabitViewModel {
         }
 
         let previousDate = habit.lastCompletedDate
-        habit.doneToday = true
         habit.completed += 1
         habit.lastCompletedDate = today
 

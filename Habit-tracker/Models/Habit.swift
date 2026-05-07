@@ -4,12 +4,16 @@ import SwiftData
 @Model
 class Habit {
     var title: String
-    var doneToday: Bool = false
     var completed: Int = 0
     var lastCompletedDate: Date?
 
     var currentStreak: Int = 0
     var maxStreak: Int = 0
+
+    var doneToday: Bool {
+        guard let last = lastCompletedDate else { return false }
+        return Calendar.current.isDateInToday(last)
+    }
 
     init(title: String) {
         self.title = title
