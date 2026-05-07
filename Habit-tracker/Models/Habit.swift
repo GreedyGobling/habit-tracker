@@ -7,10 +7,9 @@ class Habit {
     var completed: Int = 0
     var lastCompletedDate: Date?
 
-    var 
-    
     var currentStreak: Int = 0
     var maxStreak: Int = 0
+    var completionDates: [Date] = []
 
     var doneToday: Bool {
         guard let last = lastCompletedDate else { return false }
