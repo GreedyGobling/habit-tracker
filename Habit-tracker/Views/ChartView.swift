@@ -1,9 +1,8 @@
-//
-//  ChartView.swift
-//  Habit-tracker
-//
-//  Created by robin on 2026-05-02.
-//
+import SwiftUI
 
-// view to see data / statisics
-
+struct ChartView: View {
+    var body: some View {
+        Text("Stats coming soon")
+            .navigationTitle("Stats")
+    }
+}

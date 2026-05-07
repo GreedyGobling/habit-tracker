@@ -12,7 +12,12 @@ import SwiftData
 struct Habit_trackerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem { Label("Habits", systemImage: "checklist") }
+                NavigationStack { ChartView() }
+                    .tabItem { Label("Stats", systemImage: "chart.bar.fill") }
+            }
         }
         .modelContainer(for: Habit.self)
     }

@@ -56,7 +56,7 @@ struct EditorView: View {
             }
 
             // make seperate button func with if enum case TODO
-            Button(role: .destructive) {
+            Button(role: .destructive) { // remove this before sending
                 if let habit {
                     vm.deleteHabit(habit, context: modelContext)
                     dismiss()
