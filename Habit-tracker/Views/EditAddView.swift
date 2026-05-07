@@ -75,6 +75,17 @@ struct EditorView: View {
         .onAppear {
             habitname = habit?.title ?? ""
         }
+        .alert(
+            "Ett fel intraffade",
+            isPresented: Binding(
+                get: { vm.errorMessage != nil },
+                set: { if !$0 { vm.errorMessage = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) { vm.errorMessage = nil }
+        } message: {
+            Text(vm.errorMessage ?? "")
+        }
     }
 
 }

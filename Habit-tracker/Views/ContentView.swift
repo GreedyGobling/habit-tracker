@@ -53,5 +53,16 @@ struct ContentView: View {
         .sheet(isPresented: $showEditor) {
             EditorView(habit: selectedHabit)
         }
+        .alert(
+            "Ett fel intraffade",
+            isPresented: Binding(
+                get: { vm.errorMessage != nil },
+                set: { if !$0 { vm.errorMessage = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) { vm.errorMessage = nil }
+        } message: {
+            Text(vm.errorMessage ?? "")
+        }
     }
 }
