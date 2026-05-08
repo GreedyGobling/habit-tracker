@@ -45,12 +45,6 @@ struct ContentView: View {
             } label: {
                 Label("Add new habit", systemImage: "plus.circle.fill")
             }
-
-            Button(role: .destructive) { // this is a debug button
-                vm.deleteAll(context: modelContext)
-            } label: {
-                Label("Delete all", systemImage: "trash")
-            }
         }
         .padding()
         .sheet(isPresented: $showEditor) {
